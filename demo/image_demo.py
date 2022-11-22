@@ -1,5 +1,6 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import asyncio
+import time
 from argparse import ArgumentParser
 
 from mmdet.apis import (async_inference_detector, inference_detector,
@@ -33,7 +34,10 @@ def main(args):
     # build the model from a config file and a checkpoint file
     model = init_detector(args.config, args.checkpoint, device=args.device)
     # test a single image
+    time0 = time.time()
     result = inference_detector(model, args.img)
+    time1=time.time()
+    print("time:",time1-time0)
     # show the results
     show_result_pyplot(
         model,
