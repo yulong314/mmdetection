@@ -1,7 +1,7 @@
 # Copyright (c) OpenMMLab. All rights reserved.
 import warnings
 from pathlib import Path
-
+import time
 import mmcv
 import numpy as np
 import torch
@@ -102,7 +102,7 @@ def inference_detector(model, imgs):
         If imgs is a list or tuple, the same length list type results
         will be returned, otherwise return the detection results directly.
     """
-
+    time10 = time.perf_counter()
     if isinstance(imgs, (list, tuple)):
         is_batch = True
     else:
@@ -146,10 +146,13 @@ def inference_detector(model, imgs):
                 m, RoIPool
             ), 'CPU inference with RoIPool is not supported currently.'
 
+    time20 = time.perf_counter()
     # forward the model
     with torch.no_grad():
         results = model(return_loss=False, rescale=True, **data)
 
+    time30 = time.perf_counter()
+    # print(f'Inference model time: {time30 - time20:.3f}s, (test_pipeline: {time20 - time10:.3f}s)')
     if not is_batch:
         return results[0]
     else:

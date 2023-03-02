@@ -889,3 +889,5 @@ class OpenImagesChallengeDataset(OpenImagesDataset):
                             image_level_label=image_level_label,
                             confidence=confidence))
         return item_lists
+
+

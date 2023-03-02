@@ -209,3 +209,4 @@ class TwoStageDetector(BaseDetector):
                 f'list of supported models,'
                 f'https://mmdetection.readthedocs.io/en/latest/tutorials/pytorch2onnx.html#list-of-supported-models-exportable-to-onnx'  # noqa E501
             )
+
